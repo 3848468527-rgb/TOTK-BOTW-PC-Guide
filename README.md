@@ -43,10 +43,10 @@
 
 | 项目 | 本机实测配置 |
 |---|---|
-| 模拟器 | Cemu 2.0-86 |
-| 图形包 | Resolution 2K/4K + FPS++ 120 + Clarity/阴影优化 |
-| 实测 | 2K + 120 帧图形包，画质与流畅度接近原生 |
-| 注意 | Cemu 的 120 帧需配合 FPS++ 图形包，否则物理会变速 |
+| 模拟器 | Cemu 2.0-86 / Cemu 2.6（本机调优版）|
+| 图形包 | Resolution（内部 1920x1080）+ FPS++ 165 + Clarity/阴影优化 |
+| 实测 | 2K 输出 + 165 帧（改 `rules.txt` 默认值，比设置菜单更可靠），一键启动脚本自动设高优先级 |
+| 注意 | 高帧率必须配合 FPS++ 图形包，否则物理会变速；改完规则需重启 Cemu 生效 |
 
 **快速使用**：见 [docs/BOTW-Cemu指南.md](docs/BOTW-Cemu指南.md)。
 要点：Cemu 里 **选项 → 图形包** 勾选 Resolution / FPS++ / Clarity；**选项 → 通用设置** 里 MLC 路径指向 `mlc`、Game Path 指向 `roms`；Graphic API 选 Vulkan、`async compile` 开、`accurateShaderMul` 关。
@@ -69,6 +69,8 @@
 ```
 config/    totk-2k120.ini / totk-2k60.ini      王国之泪原生版配置模板
 scripts/   apply-totk-config.ps1               一键应用配置（自动备份）
+           tune-botw-graphics.ps1              调优 BOTW 图形包默认值（rules.txt）
+           launch-botw.ps1                     一键启动 Cemu 旷野之息（高优先级）
            check-setup.ps1                     硬件与目录检查
 docs/      TOTK-原生版指南.md                  构建/安装/调优完整教程
            BOTW-Cemu指南.md                    Cemu 配置完整教程

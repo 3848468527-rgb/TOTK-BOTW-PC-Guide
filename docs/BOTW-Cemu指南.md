@@ -71,3 +71,39 @@ Cemu_2.0-86\
 - **帧率低**：检查是否误选了 OpenGL；降低 Resolution/阴影；关掉 MSAA。
 - **画质发灰**：开 Clarity 图形包；颜色选项里调对比度。
 - **手柄键位不对**：输入设置里重新映射，或换用 Switch Pro 布局。
+## 八、进阶：图形包默认值调优（rules.txt）
+
+本机实测有效的高帧率做法（作者实测经验）：
+
+> **Cemu 会以图形包 `rules.txt` 的 `[Default]` 值为准**，`settings.xml` 里的同名键有时不生效。
+> 改完必须**完全退出并重启 Cemu**。
+
+- **帧率上限**：`Mods\FPS++\rules.txt` 里的
+  ```ini
+  $fpsLimitNormal = 165
+  $fpsLimitAdvanced = 165
+  ```
+  改成你显示器的刷新率（如 165/180）。日志里看到 `Set vsync frequency to 165` 即生效。
+- **内部渲染分辨率**：`Graphics\rules.txt` 里的
+  ```ini
+  $width = 1920
+  $height = 1080
+  ```
+  1080p 内部渲染 → 输出到 2K 窗口，画面清晰且比原生 2K 省性能。
+
+自动化脚本（会先备份原文件）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\tune-botw-graphics.ps1 `
+  -CemuDir "D:\Cemu-BOTW\Cemu" -FpsLimit 165 -Width 1920 -Height 1080
+```
+
+## 九、一键启动脚本（高优先级）
+
+游戏目录较深、双击不方便时，可用启动脚本：关掉残留 Cemu 进程 → 直接载入 `U-King.rpx` → 设为高优先级（减少卡顿）。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\launch-botw.ps1 -CemuDir "D:\Cemu-BOTW\Cemu"
+```
+
+也可以做成桌面快捷方式（目标：`powershell -NoProfile -ExecutionPolicy Bypass -File "…\launch-botw.ps1"`）。
