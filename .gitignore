@@ -1,0 +1,24 @@
+# 游戏文件 / 存档 / 日志 / 构建产物（严禁提交）
+romfs/
+exefs/
+build-cache/
+shaderCache/
+pipeline-cache.bin
+pipeline-keys.bin
+shader-*.bin
+seed-*.bin
+romfs-index.bin
+*.exe
+*.dll
+*.xci
+*.nsp
+*.wua
+*.wud
+*.rpx
+profile/
+profile-backup-*/
+mlc/
+roms/
+graphicPacks/
+logs/
+*.log
